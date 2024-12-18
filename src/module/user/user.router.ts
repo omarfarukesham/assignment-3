@@ -6,7 +6,7 @@ import { UserValidation } from './user.validation'
 
 const userRouter = Router()
 
-userRouter.post('/create-admin', validateRequest(UserValidation.userValidationSchema), userController.createUser)
+userRouter.post('/user-create', validateRequest(UserValidation.userValidationSchema), userController.createUser)
 userRouter.get('/:userId', userController.getSingleUser)
 userRouter.put('/:userId', userController.updateUser)
 userRouter.delete('/:userId', userController.deleteUser)
