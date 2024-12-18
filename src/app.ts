@@ -1,5 +1,6 @@
 
 import express, { Request, Response } from 'express'
+import userRouter from './module/user/user.router'
 // import { globalErrorHandler } from './middlewares/globalErrorHandler'
 // import bookingRouter from './module/booking/booking.route'
 // import tourRouter from './module/tour/tour.route'
@@ -12,7 +13,7 @@ const app = express()
 app.use(express.json())
 
 // app.use('/api/auth', authRouter)
-// app.use('/api/user', userRouter)
+app.use('/api/user', userRouter)
 // app.use('/api/tour', tourRouter)
 // app.use('/api/booking', bookingRouter)
 
