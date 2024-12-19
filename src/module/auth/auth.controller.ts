@@ -6,7 +6,7 @@ import { StatusCodes } from "http-status-codes";
 
 const register = catchAsync(async(req: Request, res: Response)=>{
     const result = await AuthService.register(req.body);
-
+    
     sendResponse(res,{
         statusCode: StatusCodes.CREATED,
         status: true,
@@ -14,16 +14,18 @@ const register = catchAsync(async(req: Request, res: Response)=>{
         data: result
     })
 })
+
 const login = catchAsync(async(req: Request, res: Response)=>{
     const result = await AuthService.login(req.body);
 
-    sendResponse(res,{
+    sendResponse(res, {
         statusCode: StatusCodes.ACCEPTED,
         status: true,
-        message: "User logged in successfully",
-        token: result?.token,
-        data: result?.user
-    })
+        message: "Login successful", 
+        data: {
+          token: result?.token || "", 
+        },
+      });
 })
 
 

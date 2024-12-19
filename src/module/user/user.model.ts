@@ -35,12 +35,10 @@ const userSchema = new Schema<IUser>(
       type: String,
       enum: ["admin", "user"],
       default: "user",
-      required: true,
     },
     isBlocked: {
       type: Boolean,
       default: false,
-      required: true,
     },
   },
   {

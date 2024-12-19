@@ -9,7 +9,7 @@ const register = async (payload: IUser) => {
 }
 
 const login = async (payload: { email: string; password: string }) => {
-  // checking if the user is exist
+ 
   const user = await User.findOne({ email: payload?.email }).select('+password');
 
   if (!user) {
@@ -17,9 +17,9 @@ const login = async (payload: { email: string; password: string }) => {
   }
 
   // checking if the user is inactive
-  const userStatus = user?.userStatus
+  const userStatus = user?.isBlocked
 
-  if (userStatus === 'inactive') {
+  if (userStatus === true) {
     throw new Error('This user is blocked ! !')
   }
 
@@ -30,7 +30,7 @@ const login = async (payload: { email: string; password: string }) => {
   )
 
   if (!isPasswordMatched) {
-    throw new Error('Wrong Password!!! Tell me who are you? 😈')
+    throw new Error('Wrong Password!!! Tell me who are you?')
   }
 
   //create token and sent to the  client
@@ -39,7 +39,7 @@ const login = async (payload: { email: string; password: string }) => {
     role: user?.role,
   }
 
-  const token = jwt.sign(jwtPayload, "secret", { expiresIn: '1d' });
+  const token = jwt.sign(jwtPayload, "primarytestkey", { expiresIn: '10d' });
 
   return {token, user};
 }
