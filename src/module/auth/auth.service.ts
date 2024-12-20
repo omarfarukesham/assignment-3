@@ -9,13 +9,11 @@ const register = async (payload: IUser) => {
   if(!result) {
     throw new CustomError('Failed to create user', 500);
   }
-
   return result
 }
 
 const login = async (payload: { email: string; password: string }) => {
   const user = await User.findOne({ email: payload?.email }).select('+password');
-  // console.log(user)
 
   if (!user) {
     throw new CustomError('This user is not found!', 404, { field: 'email' });
@@ -32,50 +30,12 @@ const login = async (payload: { email: string; password: string }) => {
   }
 
   const jwtPayload = { email: user.email, role: user.role ,  id: user._id.toString()};
-  console.log("auth id setup ... ",jwtPayload)
+  // console.log("auth id setup ... ",jwtPayload)
 
   const token = jwt.sign(jwtPayload, "primarytestkey", { expiresIn: '10d' });
 
   return { token, user };
 };
-
-
-
-// const login = async (payload: { email: string; password: string }) => {
- 
-//   const user = await User.findOne({ email: payload?.email }).select('+password');
-
-//   if (!user) {
-//     throw new Error('This user is not found !')
-//   }
-
-//   // checking if the user is inactive
-//   const userStatus = user?.isBlocked
-
-//   if (userStatus === true) {
-//     throw new Error('This user is blocked ! !')
-//   }
-
-//   //checking if the password is correct
-//   const isPasswordMatched = await bcrypt.compare(
-//     payload?.password,
-//     user?.password
-//   )
-
-//   if (!isPasswordMatched) {
-//     throw new Error('Wrong Password!!! Tell me who are you?')
-//   }
-
-//   //create token and sent to the  client
-//   const jwtPayload = {
-//     email: user?.email,
-//     role: user?.role,
-//   }
-
-//   const token = jwt.sign(jwtPayload, "primarytestkey", { expiresIn: '10d' });
-
-//   return {token, user};
-// }
 
 export const AuthService = {
   register,

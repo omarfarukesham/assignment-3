@@ -23,8 +23,7 @@ const createBlog = catchAsync(
   })
 
 const getBlogs = catchAsync(async (req, res) => {
-  const result = await blogService.getBlogs()
-
+  const result = await blogService.getBlogs(req.query)
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     message: 'Blog getting successfully',
@@ -33,9 +32,8 @@ const getBlogs = catchAsync(async (req, res) => {
 })
 
 const getSingleBlog = catchAsync(async (req, res) => {
-  console.log(req.params)
+  // console.log(req.params)
   const blogId = req.params.id
-
   const result = await blogService.getSingleBlog(blogId)
 
   sendResponse(res, {

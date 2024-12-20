@@ -1,7 +1,6 @@
 import mongoose, { model, Schema } from "mongoose";
 import { IBlog } from "./blog.interface";
 
-
 const blogSchema = new Schema({
     title: {
         type: String,
