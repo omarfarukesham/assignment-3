@@ -12,8 +12,8 @@ const createBlog = async (payload: IBlog): Promise<IBlog> => {
 const getBlogs = async (query: Record<string, unknown> ) => {
     const searchableFields = ["title", "content"];
 
-    const blogs = new QueryBuilder(Blog.find(), query).search(searchableFields).filter().sort().select();
-    const result = await blogs.modelQuery;
+    const blogs = new QueryBuilder(Blog.find(), query).search(searchableFields).filter().sort().select()
+    const result = await blogs.modelQuery.populate("author", "name email role");
     return result;
 }
 

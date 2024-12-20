@@ -4,6 +4,7 @@ import userRouter from './module/user/user.router'
 import authRouter from './module/auth/auth.router'
 import blogRouter from './module/blog/blog.router'
 import { globalErrorHandler } from './middlewares/globalErrorHandler'
+import adminRouter from './module/admin/admin.router'
 
 
 const app = express()
@@ -12,6 +13,7 @@ const app = express()
 app.use(express.json())
 
 app.use('/api/auth', authRouter)
+app.use('/api/admin', adminRouter)
 app.use('/api/user', userRouter)
 app.use('/api/blogs', blogRouter)
 
