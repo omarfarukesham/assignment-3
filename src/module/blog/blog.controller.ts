@@ -5,9 +5,14 @@ import { blogService } from './blog.service'
 
 const createBlog = catchAsync(
   async (req, res) => {
-    const payload = req.body
-
-    const result = await blogService.createBlog(payload)
+    console.log(req)
+    const { user } = req;
+    const payload = {
+      ...req.body,
+      author: user.id, 
+    };
+  
+    // const result = await blogService.createBlog(payload);
 
     sendResponse(res, {
       statusCode: StatusCodes.CREATED,

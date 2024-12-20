@@ -9,6 +9,8 @@ const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization;
     // checking if the token is missing
+      console.log("auth ... ",token)
+
     if (!token) {
       throw new Error( 'You are not authorized!');
     }
@@ -16,12 +18,13 @@ const auth = (...requiredRoles: TUserRole[]) => {
     // checking if the given token is valid
     const decoded = jwt.verify(
       token,
-      "secret",
+      "primarytestkey",
     ) as JwtPayload;
 
     console.log({decoded})
 
     const { role, email} = decoded;
+    console.log(role, email)
 
     // checking if the user is exist
   const user = await User.findOne({ email });

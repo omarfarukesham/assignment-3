@@ -6,12 +6,12 @@ import Blog from "./blog.model"
 
 const createBlog = async (payload: IBlog): Promise<IBlog> => {
 //   payload.role = 'admin';
-  const result = await Blog.create(payload)
+  const result = (await Blog.create(payload)).populate("author", "name email role")
   return result
 }
 
 const getBlogs = async () => {
-  const result = await Blog.find()
+  const result = await Blog.find().populate("author", "name email role")
   return result
 }
 
