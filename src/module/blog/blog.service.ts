@@ -1,5 +1,4 @@
-// import { IUser } from './user.interface'
-// import User from './user.model'
+
 
 import { IBlog } from "./blog.interface"
 import Blog from "./blog.model"

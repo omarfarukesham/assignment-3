@@ -18,8 +18,8 @@ const blogValidationSchema = z.object({
     author: z
       .string({
         required_error: "Author ID must be provided and must be a string",
-      })
-      .regex(/^[a-fA-F0-9]{24}$/, { message: "Invalid ObjectId format for author" }),
+      }).optional(),
+      // .regex(/^[a-fA-F0-9]{24}$/, { message: "Invalid ObjectId format for author" }),
 
     isPublished: z
       .boolean()

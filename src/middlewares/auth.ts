@@ -9,22 +9,24 @@ const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization;
     // checking if the token is missing
-      console.log("auth ... ",token)
+      // console.log("auth ... ",token)
 
     if (!token) {
       throw new Error( 'You are not authorized!');
     }
 
+    const getToken = token.split(" ")[1]
     // checking if the given token is valid
     const decoded = jwt.verify(
-      token,
+   
+      getToken,
       "primarytestkey",
     ) as JwtPayload;
+    console.log("decode user .... blog create",decoded)
+    
 
-    console.log({decoded})
-
-    const { role, email} = decoded;
-    console.log(role, email)
+    const { role, email, id } = decoded;
+    // console.log(role, email)
 
     // checking if the user is exist
   const user = await User.findOne({ email });
@@ -47,6 +49,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
     }
 
     req.user = decoded as JwtPayload;
+    console.log(req.user)
     next();
   });
 };

@@ -3,10 +3,11 @@ import validateRequest from '../../middlewares/validateRequest'
 import { blogController } from './blog.controller'
 import { BlogValidation } from './blog.validation'
 import auth from '../../middlewares/auth'
+import { USER_ROLE } from '../user/user.constants'
 
 const blogRouter = Router()
 
-blogRouter.post('/', auth("admin", "user"), validateRequest(BlogValidation.blogValidationSchema), blogController.createBlog)
+blogRouter.post('/', auth(USER_ROLE.admin, USER_ROLE.user), validateRequest(BlogValidation.blogValidationSchema), blogController.createBlog)
 blogRouter.get('/:id', blogController.getSingleBlog)
 blogRouter.patch('/:id', blogController.updateBlog)
 blogRouter.delete('/:id', blogController.deleteBlog)

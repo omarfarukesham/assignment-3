@@ -5,22 +5,21 @@ import { blogService } from './blog.service'
 
 const createBlog = catchAsync(
   async (req, res) => {
-    console.log(req)
-    const { user } = req;
+    if (!req.user) {
+      throw new Error('User is not authenticated');
+    }
     const payload = {
       ...req.body,
-      author: user.id, 
+      author: req.user.id
     };
-  
-    // const result = await blogService.createBlog(payload);
+// console.log(payload)
+    const result = await blogService.createBlog(payload)
 
     sendResponse(res, {
       statusCode: StatusCodes.CREATED,
       message: 'Blog created successfully',
       data: result,
-    }
-
-    )
+    })
   })
 
 const getBlogs = catchAsync(async (req, res) => {

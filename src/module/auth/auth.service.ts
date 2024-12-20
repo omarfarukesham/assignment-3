@@ -15,6 +15,7 @@ const register = async (payload: IUser) => {
 
 const login = async (payload: { email: string; password: string }) => {
   const user = await User.findOne({ email: payload?.email }).select('+password');
+  // console.log(user)
 
   if (!user) {
     throw new CustomError('This user is not found!', 404, { field: 'email' });
@@ -30,7 +31,9 @@ const login = async (payload: { email: string; password: string }) => {
     throw new CustomError('Invalid credentials', 401, { field: 'password' });
   }
 
-  const jwtPayload = { email: user.email, role: user.role };
+  const jwtPayload = { email: user.email, role: user.role ,  id: user._id.toString()};
+  console.log("auth id setup ... ",jwtPayload)
+
   const token = jwt.sign(jwtPayload, "primarytestkey", { expiresIn: '10d' });
 
   return { token, user };
