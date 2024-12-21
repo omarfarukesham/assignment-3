@@ -1,6 +1,8 @@
-# Assignment-3
+![Assignment-3](https://ibb.co.com/Ycydc8x)
 
-# Blog Project: Assignment Requirements
+<h1 align="center">
+  Assignment  project - 3 🚀
+</h1>
 
 ## Overview
 
