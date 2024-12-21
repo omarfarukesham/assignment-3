@@ -23,15 +23,21 @@ const getSingleBlog = async (id: string) => {
 }
 
 const updateBlog = async (id: string, data: IBlog) => {
-  const result = await Blog.findByIdAndUpdate(id, data, {
-    new: true,
-  }).populate("author", "name email role")
 
+  const result = await Blog.findOneAndUpdate({_id: id}, data, {
+    new: true,
+  })
   return result
+
 }
 
-const deleteBlog = async (id: string) => {
-  const result = await Blog.findByIdAndDelete(id)
+const deleteBlog = async (blogId: string, userId: string) => {
+  //  console.log(blogId, userId)
+
+   const result = await Blog.findByIdAndDelete({_id: blogId, another:userId})
+   if(result) {
+    throw new Error ('Could not delete')
+   }
   return result
 }
 

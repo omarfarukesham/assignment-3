@@ -5,6 +5,7 @@ import authRouter from './module/auth/auth.router'
 import blogRouter from './module/blog/blog.router'
 import { globalErrorHandler } from './middlewares/globalErrorHandler'
 import adminRouter from './module/admin/admin.router'
+import notFound from './middlewares/notFound'
 
 
 const app = express()
@@ -27,12 +28,8 @@ app.get('/', (req: Request, res: Response) => {
 
 
 app.use(globalErrorHandler)
+app.use(notFound)
 
-app.use("*", (req: Request, res: Response) => {
-  res.status(404).json({
-    status: false,
-    message: 'Route not found'
-  })
-})
+
 
 export default app

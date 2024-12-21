@@ -46,6 +46,8 @@ const getSingleBlog = catchAsync(async (req, res) => {
 const updateBlog = catchAsync(async (req, res) => {
   const blogId = req.params.id
   const body = req.body
+
+console.log("update blog ......",body, blogId)
   const result = await blogService.updateBlog(blogId, body)
 
   sendResponse(res, {
@@ -56,8 +58,11 @@ const updateBlog = catchAsync(async (req, res) => {
 })
 
 const deleteBlog = catchAsync(async (req, res) => {
-  const userId = req.params.id
-  await blogService.deleteBlog(userId)
+  const blogId = req.params.id
+  const userId = req.user?.id;
+  // console.log(req.user)
+
+  await blogService.deleteBlog(blogId, userId)
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
@@ -65,6 +70,9 @@ const deleteBlog = catchAsync(async (req, res) => {
     data: {},
   })
 })
+
+
+
 
 export const blogController = {
   createBlog,
