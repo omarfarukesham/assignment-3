@@ -1,4 +1,4 @@
-![Assignment-3](hhttps://img.freepik.com/premium-vector/illustration-programmer-computer-vector-technology-concept-web-digital-design-programming_1013341-205380.jpg?semt=ais_hybrid)
+![Assignment-3](https://i.ibb.co.com/qNWgN9v/DALL-E-2024-12-19-21-40-45-A-detailed-illustration-capturing-the-essence-of-collaborative-problem-so.webp)
 
 <h1 align="center">
   Assignment  project - 3 🚀
