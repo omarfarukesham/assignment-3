@@ -10,6 +10,8 @@ const blog_router_1 = __importDefault(require("./module/blog/blog.router"));
 const globalErrorHandler_1 = require("./middlewares/globalErrorHandler");
 const admin_router_1 = __importDefault(require("./module/admin/admin.router"));
 const notFound_1 = __importDefault(require("./middlewares/notFound"));
+const product_routes_1 = require("./module/product/product.routes");
+const order_routes_1 = require("./module/order/order.routes");
 const app = (0, express_1.default)();
 // middleware
 app.use(express_1.default.json());
@@ -17,6 +19,8 @@ app.use('/api/auth', auth_router_1.default);
 app.use('/api/admin', admin_router_1.default);
 app.use('/api/user', user_router_1.default);
 app.use('/api/blogs', blog_router_1.default);
+app.use('/api/products', product_routes_1.ProductRoutes);
+app.use('/api/order', order_routes_1.OrderRoutes);
 app.get('/', (req, res) => {
     res.send({
         status: true,
