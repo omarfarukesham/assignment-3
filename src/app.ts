@@ -8,9 +8,15 @@ import adminRouter from './module/admin/admin.router'
 import notFound from './middlewares/notFound'
 import { ProductRoutes } from './module/product/product.routes'
 import { OrderRoutes } from './module/order/order.routes'
-
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 const app = express()
+//parsers
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors({ origin: ['http://localhost:5173'] }));
+
 
 // middleware
 app.use(express.json())
@@ -26,7 +32,7 @@ app.use('/api/order', OrderRoutes)
 app.get('/', (req: Request, res: Response) => {
   res.send({
     status: true,
-    message: 'Server is now Live - chill',
+    message: 'Server is now Live - Alhamdulillah',
   })
 })
 
