@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductControllers = void 0;
 const product_service_1 = require("./product.service");
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // console.log(req.body)
     try {
         const payload = req.body;
         const result = yield product_service_1.ProductServices.createProductIntoDB(payload);
