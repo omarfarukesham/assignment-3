@@ -8,6 +8,7 @@ export enum Category {
   
   export type Product = {
     id: string; 
+    image: string;
     title: string; 
     author: string; 
     price: number; 

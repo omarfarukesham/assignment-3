@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { ProductServices } from './product.service';
 
 const createProduct = async (req: Request, res: Response) => {
+  // console.log(req.body)
   try {
     const  payload  = req.body;
     const result = await ProductServices.createProductIntoDB(payload);

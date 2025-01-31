@@ -13,6 +13,10 @@ const productSchema = new Schema<Product>({
     required: [true, 'Author name is required'], 
     minlength: [3, 'Author name must be at least 3 characters long'] 
   },
+  image: { 
+    type: String, 
+    required: [true, 'Image URL is required'] 
+  },
   price: { 
     type: Number, 
     required: [true, 'Price is required'], 
