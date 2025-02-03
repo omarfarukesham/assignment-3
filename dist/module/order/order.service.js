@@ -13,7 +13,6 @@ exports.OrderServices = void 0;
 const order_model_1 = require("./order.model");
 // Create a new Order
 const createOrderIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(payload);
     const result = yield order_model_1.OrderModel.create(payload);
     return result;
 });

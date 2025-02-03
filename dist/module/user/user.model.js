@@ -25,7 +25,6 @@ const userSchema = new mongoose_1.Schema({
     email: {
         type: String,
         required: [true, "Email is required"],
-        unique: true,
         validate: {
             validator: function (value) {
                 return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(value);
@@ -37,7 +36,7 @@ const userSchema = new mongoose_1.Schema({
     password: {
         type: String,
         required: [true, "Password is required"],
-        minlength: 8,
+        minlength: 6,
         maxlength: 20,
         select: false,
     },

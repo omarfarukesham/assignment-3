@@ -27,7 +27,7 @@ app.use('/api/admin', adminRouter)
 app.use('/api/user', userRouter)
 app.use('/api/blogs', blogRouter)
 app.use('/api/products', ProductRoutes)
-app.use('/api/order', OrderRoutes)
+app.use('/api/orders', OrderRoutes)
 app.use('/api/checkout', CheckoutRoutes)
 
 

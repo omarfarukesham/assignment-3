@@ -1,25 +1,18 @@
 /* eslint-disable no-console */
 import { Request, Response, NextFunction} from 'express';
 import { OrderServices } from './order.service';
-import Stripe from 'stripe';
-import { OrderModel } from './order.model';
 import { Order } from './order.interface';
-// Initialize Stripe
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-  apiVersion: "2025-01-27.acacia",
-});
-
+import { stripe } from '../../config/stripe';
 
 export const OrderControllers = {
-  createOrder: async (req: Request, res: Response, next: NextFunction) => {
-    try {
+  boiOrder: async (req: Request, res: Response, next: NextFunction) => {
+    try  {
       const { email, product, quantity, totalPrice, paymentMethodId } = req.body;
-        console.log(req.body)
-      if (!email || !product || !quantity || !totalPrice || !paymentMethodId) {
-        return res.status(400).json({ 
-          success: false, 
-          message: "Missing required fields" 
-        });
+      if(!email || !product || !quantity || !totalPrice || !paymentMethodId) {
+        res.status(400).json({
+          success: false,
+          message: "Missing required fields"
+        })
       }
 
       const paymentIntent = await stripe.paymentIntents.create({
@@ -42,16 +35,15 @@ export const OrderControllers = {
         updatedAt: new Date(),
       };
 
-      const newOrder = await OrderServices.createOrderIntoDB(orderPayload);
-
-      return res.status(200).json({
+      const order = await OrderServices.createOrderIntoDB(orderPayload);
+      res.status(201).json({
         success: true,
         message: "Order created successfully",
-        clientSecret: paymentIntent.client_secret,
-        order: newOrder,
+        data: order,
       });
-    } catch (error) {
-      next(error);
+
+    }catch (err) {
+      next(err);
     }
   },
 

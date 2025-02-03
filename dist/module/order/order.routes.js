@@ -7,15 +7,16 @@ exports.OrderRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const order_controller_1 = require("./order.controller");
 const router = express_1.default.Router();
-// Create a new Order ----------done
-router.post('/', order_controller_1.OrderControllers.createOrder);
-// Get all order -------- done
+// Create new order
+router.post('/', order_controller_1.OrderControllers.boiOrder);
+// Get all orders
 router.get('/', order_controller_1.OrderControllers.getAllOrder);
+// Get total revenue
 router.get('/revenue', order_controller_1.OrderControllers.getTotalOrderRevenue);
-// Get a single order by ID----done
+// Get single order
 router.get('/:orderId', order_controller_1.OrderControllers.getSingleOrder);
-// Update a order by ID ----------- done
-router.put('/:orderId', order_controller_1.OrderControllers.updateOrder);
-// Delete a order by ID ---------- done
+// Update order
+router.patch('/:orderId', order_controller_1.OrderControllers.updateOrder);
+// Delete order
 router.delete('/:orderId', order_controller_1.OrderControllers.deleteOrder);
 exports.OrderRoutes = router;
