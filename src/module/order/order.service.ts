@@ -4,7 +4,6 @@ import { OrderModel } from "./order.model";
 
 // Create a new Order
 const createOrderIntoDB = async (payload:Order) => {
-  console.log(payload)
   const result = await OrderModel.create(payload);
   return result;
 };

@@ -15,7 +15,6 @@ const userSchema = new Schema<IUser>(
     email: {
       type: String,
       required: [true, "Email is required"],
-      unique: true,
       validate: {
         validator: function (value: string) {
           return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(value);
@@ -27,7 +26,7 @@ const userSchema = new Schema<IUser>(
     password: {
       type: String,
       required: [true, "Password is required"],
-      minlength: 8,
+      minlength: 6,
       maxlength: 20,
       select: false,
     },

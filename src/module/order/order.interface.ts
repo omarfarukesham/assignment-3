@@ -6,5 +6,10 @@ export type Order = {
     product: Types.ObjectId;
     quantity: number; 
     totalPrice: number; 
+    paymentStatus: "pending" | "paid" | "failed";
+    paymentIntentId?: string;
+    createdAt: Date;
+    updatedAt: Date;
   };
   
+

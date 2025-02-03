@@ -10,12 +10,13 @@ import { ProductRoutes } from './module/product/product.routes'
 import { OrderRoutes } from './module/order/order.routes'
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import { CheckoutRoutes } from './module/checkout/checkout.routes'
 
 const app = express()
 //parsers
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: ['http://localhost:5173'] }));
+app.use(cors({ origin: ['http://localhost:5173', 'http://localhost:5174'] }));
 
 
 // middleware
@@ -27,6 +28,7 @@ app.use('/api/user', userRouter)
 app.use('/api/blogs', blogRouter)
 app.use('/api/products', ProductRoutes)
 app.use('/api/order', OrderRoutes)
+app.use('/api/checkout', CheckoutRoutes)
 
 
 app.get('/', (req: Request, res: Response) => {
