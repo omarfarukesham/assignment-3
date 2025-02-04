@@ -8,7 +8,7 @@ const express_1 = __importDefault(require("express"));
 const order_controller_1 = require("./order.controller");
 const router = express_1.default.Router();
 // Create new order
-router.post('/', order_controller_1.OrderControllers.boiOrder);
+// router.post('/', OrderControllers.boiOrder);
 //Post checkout route
 router.post('/checkout', order_controller_1.OrderControllers.checkout);
 // Get all orders

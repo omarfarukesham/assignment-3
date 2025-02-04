@@ -11,49 +11,48 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderControllers = void 0;
 const order_service_1 = require("./order.service");
-const stripe_1 = require("../../config/stripe");
 exports.OrderControllers = {
-    boiOrder: (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const { email, product, quantity, totalPrice, paymentMethodId } = req.body;
-            if (!email || !product || !quantity || !totalPrice || !paymentMethodId) {
-                res.status(400).json({
-                    success: false,
-                    message: "Missing required fields"
-                });
-            }
-            const paymentIntent = yield stripe_1.stripe.paymentIntents.create({
-                amount: Math.round(totalPrice * 100),
-                currency: "usd",
-                payment_method: paymentMethodId,
-                confirmation_method: "manual",
-                confirm: true,
-            });
-            const orderPayload = {
-                id: paymentIntent.id,
-                email,
-                product,
-                quantity,
-                totalPrice,
-                paymentStatus: "pending",
-                paymentIntentId: paymentIntent.id,
-                createdAt: new Date(),
-                updatedAt: new Date(),
-            };
-            const order = yield order_service_1.OrderServices.createOrderIntoDB(orderPayload);
-            res.status(201).json({
-                success: true,
-                message: "Order created successfully",
-                data: order,
-            });
-        }
-        catch (err) {
-            next(err);
-        }
-    }),
+    // boiOrder: async (req: Request, res: Response, next: NextFunction) => {
+    //   try  {
+    //     const { email, product, quantity, totalPrice, paymentMethodId } = req.body;
+    //     if(!email || !product || !quantity || !totalPrice || !paymentMethodId) {
+    //       res.status(400).json({
+    //         success: false,
+    //         message: "Missing required fields"
+    //       })
+    //     }
+    //     const paymentIntent = await stripe.paymentIntents.create({
+    //       amount: Math.round(totalPrice * 100),
+    //       currency: "usd",
+    //       payment_method: paymentMethodId,
+    //       confirmation_method: "manual",
+    //       confirm: true,
+    //     });
+    //     const orderPayload: Order = {
+    //       id: paymentIntent.id,
+    //       email,
+    //       products,
+    //       quantity,
+    //       totalPrice,
+    //       paymentStatus: "pending",
+    //       paymentIntentId: paymentIntent.id,
+    //       createdAt: new Date(),
+    //       updatedAt: new Date(),
+    //     };
+    //     const order = await OrderServices.createOrderIntoDB(orderPayload);
+    //     res.status(201).json({
+    //       success: true,
+    //       message: "Order created successfully",
+    //       data: order,
+    //     });
+    //   }catch (err) {
+    //     next(err);
+    //   }
+    // },
     checkout: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const payload = req.body;
+            console.log(payload);
             const result = yield order_service_1.OrderServices.CheckoutOrderIntert(payload);
             res.status(200).json({
                 success: true,

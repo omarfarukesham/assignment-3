@@ -17,10 +17,25 @@ const createOrderIntoDB = (payload) => __awaiter(void 0, void 0, void 0, functio
     const result = yield order_model_1.OrderModel.create(payload);
     return result;
 });
+// const CheckoutOrderIntert = async (payload: Order) => {
+//   const result = new OrderModel(payload);
+//   const stripeBuyPrices = Number(result?.totalPrice);
+//   const amount = Number((stripeBuyPrices  * 100))
+//   const paymentIntent = await stripe.paymentIntents.create({
+//     amount: amount,
+//     payment_method_types: ["card"],
+//     currency: "usd",
+//   });
+//   return {paymentIntent,result};
+// };
 const CheckoutOrderIntert = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = new order_model_1.OrderModel(payload);
     const stripeBuyPrices = Number(result === null || result === void 0 ? void 0 : result.totalPrice);
-    const amount = Number((stripeBuyPrices * 100));
+    // Check if totalPrice is valid
+    if (isNaN(stripeBuyPrices) || stripeBuyPrices <= 0) {
+        throw new Error("Invalid totalPrice value. It must be a valid number greater than zero.");
+    }
+    const amount = Math.round(stripeBuyPrices * 100);
     const paymentIntent = yield stripe.paymentIntents.create({
         amount: amount,
         payment_method_types: ["card"],

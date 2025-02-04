@@ -8,17 +8,37 @@ const createOrderIntoDB = async (payload:Order) => {
   return result;
 };
 
+// const CheckoutOrderIntert = async (payload: Order) => {
+//   const result = new OrderModel(payload);
+//   const stripeBuyPrices = Number(result?.totalPrice);
+//   const amount = Number((stripeBuyPrices  * 100))
+//   const paymentIntent = await stripe.paymentIntents.create({
+//     amount: amount,
+//     payment_method_types: ["card"],
+//     currency: "usd",
+//   });
+//   return {paymentIntent,result};
+// };
 const CheckoutOrderIntert = async (payload: Order) => {
   const result = new OrderModel(payload);
   const stripeBuyPrices = Number(result?.totalPrice);
-  const amount = Number((stripeBuyPrices  * 100))
+  
+  // Check if totalPrice is valid
+  if (isNaN(stripeBuyPrices) || stripeBuyPrices <= 0) {
+    throw new Error("Invalid totalPrice value. It must be a valid number greater than zero.");
+  }
+
+  const amount = Math.round(stripeBuyPrices * 100); 
+
   const paymentIntent = await stripe.paymentIntents.create({
     amount: amount,
     payment_method_types: ["card"],
     currency: "usd",
   });
-  return {paymentIntent,result};
+
+  return { paymentIntent, result };
 };
+
 
 // Get all Orders 
 const getAlOrdersFromDB = async () => {

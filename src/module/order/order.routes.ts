@@ -8,7 +8,7 @@ import { OrderServices } from './order.service';
   const router: Router = express.Router();
 
 // Create new order
-router.post('/', OrderControllers.boiOrder);
+// router.post('/', OrderControllers.boiOrder);
 
 //Post checkout route
 router.post('/checkout', OrderControllers.checkout);
