@@ -31,6 +31,7 @@ const createOrderIntoDB = (payload) => __awaiter(void 0, void 0, void 0, functio
 const CheckoutOrderIntert = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = new order_model_1.OrderModel(payload);
     const stripeBuyPrices = Number(result === null || result === void 0 ? void 0 : result.totalPrice);
+    // console.log(payload)
     // Check if totalPrice is valid
     if (isNaN(stripeBuyPrices) || stripeBuyPrices <= 0) {
         throw new Error("Invalid totalPrice value. It must be a valid number greater than zero.");

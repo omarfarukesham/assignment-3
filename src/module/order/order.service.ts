@@ -22,7 +22,8 @@ const createOrderIntoDB = async (payload:Order) => {
 const CheckoutOrderIntert = async (payload: Order) => {
   const result = new OrderModel(payload);
   const stripeBuyPrices = Number(result?.totalPrice);
-  
+  // console.log(payload)
+
   // Check if totalPrice is valid
   if (isNaN(stripeBuyPrices) || stripeBuyPrices <= 0) {
     throw new Error("Invalid totalPrice value. It must be a valid number greater than zero.");
@@ -37,6 +38,7 @@ const CheckoutOrderIntert = async (payload: Order) => {
   });
 
   return { paymentIntent, result };
+
 };
 
 
