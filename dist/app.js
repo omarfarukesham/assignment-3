@@ -28,7 +28,7 @@ app.use('/api/user', user_router_1.default);
 app.use('/api/blogs', blog_router_1.default);
 app.use('/api/products', product_routes_1.ProductRoutes);
 app.use('/api/orders', order_routes_1.OrderRoutes);
-app.use('/api/checkout', checkout_routes_1.CheckoutRoutes);
+app.use('/api/checkouts', checkout_routes_1.CheckoutRoutes);
 app.get('/', (req, res) => {
     res.send({
         status: true,

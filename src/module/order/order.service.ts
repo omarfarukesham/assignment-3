@@ -1,11 +1,23 @@
 import { Order } from "./order.interface";
 import { OrderModel } from "./order.model";
-
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // Create a new Order
 const createOrderIntoDB = async (payload:Order) => {
   const result = await OrderModel.create(payload);
   return result;
+};
+
+const CheckoutOrderIntert = async (payload: Order) => {
+  const result = new OrderModel(payload);
+  const stripeBuyPrices = Number(result?.totalPrice);
+  const amount = Number((stripeBuyPrices  * 100))
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: amount,
+    payment_method_types: ["card"],
+    currency: "usd",
+  });
+  return {paymentIntent,result};
 };
 
 // Get all Orders 
@@ -57,6 +69,7 @@ const getTotalPriceFromDB = async () => {
 //all service is exported from this function
 export const OrderServices = {
     createOrderIntoDB,
+    CheckoutOrderIntert,
     getAlOrdersFromDB,
     getSingleOrderFromDB,
     updateOrderFromDB,

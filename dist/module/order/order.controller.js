@@ -51,6 +51,24 @@ exports.OrderControllers = {
             next(err);
         }
     }),
+    checkout: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const payload = req.body;
+            const result = yield order_service_1.OrderServices.CheckoutOrderIntert(payload);
+            res.status(200).json({
+                success: true,
+                message: 'Order created successfully',
+                data: result,
+            });
+        }
+        catch (err) {
+            console.error(err);
+            res.status(500).json({
+                success: false,
+                message: 'Failed to create Order',
+            });
+        }
+    }),
     getAllOrder: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const result = yield order_service_1.OrderServices.getAlOrdersFromDB();

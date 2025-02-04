@@ -10,6 +10,9 @@ import { OrderServices } from './order.service';
 // Create new order
 router.post('/', OrderControllers.boiOrder);
 
+//Post checkout route
+router.post('/checkout', OrderControllers.checkout);
+
 // Get all orders
 router.get('/', OrderControllers.getAllOrder);
 

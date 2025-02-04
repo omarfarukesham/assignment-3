@@ -28,7 +28,7 @@ app.use('/api/user', userRouter)
 app.use('/api/blogs', blogRouter)
 app.use('/api/products', ProductRoutes)
 app.use('/api/orders', OrderRoutes)
-app.use('/api/checkout', CheckoutRoutes)
+app.use('/api/checkouts', CheckoutRoutes)
 
 
 app.get('/', (req: Request, res: Response) => {

@@ -11,10 +11,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderServices = void 0;
 const order_model_1 = require("./order.model");
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 // Create a new Order
 const createOrderIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield order_model_1.OrderModel.create(payload);
     return result;
+});
+const CheckoutOrderIntert = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = new order_model_1.OrderModel(payload);
+    const stripeBuyPrices = Number(result === null || result === void 0 ? void 0 : result.totalPrice);
+    const amount = Number((stripeBuyPrices * 100));
+    const paymentIntent = yield stripe.paymentIntents.create({
+        amount: amount,
+        payment_method_types: ["card"],
+        currency: "usd",
+    });
+    return { paymentIntent, result };
 });
 // Get all Orders 
 const getAlOrdersFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -56,6 +68,7 @@ const getTotalPriceFromDB = () => __awaiter(void 0, void 0, void 0, function* ()
 //all service is exported from this function
 exports.OrderServices = {
     createOrderIntoDB,
+    CheckoutOrderIntert,
     getAlOrdersFromDB,
     getSingleOrderFromDB,
     updateOrderFromDB,
