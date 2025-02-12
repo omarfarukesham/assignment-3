@@ -7,8 +7,11 @@ import { USER_ROLE } from '../user/user.constants'
 
 const blogRouter = Router()
 
+// blogRouter.post('/', blogController.createBlog)
 blogRouter.post('/', auth(USER_ROLE.admin, USER_ROLE.user), validateRequest(BlogValidation.blogValidationSchema), blogController.createBlog)
 blogRouter.get('/:id', auth(USER_ROLE.admin, USER_ROLE.user), blogController.getSingleBlog)
+
+// blogRouter.get('/:id',  blogController.getSingleBlog)
 blogRouter.patch('/:id',auth(USER_ROLE.admin, USER_ROLE.user), blogController.updateBlog)
 blogRouter.delete('/:id', auth(USER_ROLE.admin, USER_ROLE.user), blogController.deleteBlog)
 blogRouter.get('/',  blogController.getBlogs)

@@ -23,7 +23,7 @@ const createBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     }
     const payload = Object.assign(Object.assign({}, req.body), { author: req.user.id });
     // console.log(payload)
-    const result = yield blog_service_1.blogService.createBlog(payload);
+    const result = yield blog_service_1.blogService.createBlog(req.body);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_codes_1.StatusCodes.CREATED,
         message: 'Blog created successfully',

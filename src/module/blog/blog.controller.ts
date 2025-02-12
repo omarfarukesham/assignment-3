@@ -13,7 +13,7 @@ const createBlog = catchAsync(
       author: req.user.id
     };
 // console.log(payload)
-    const result = await blogService.createBlog(payload)
+    const result = await blogService.createBlog(req.body)
 
     sendResponse(res, {
       statusCode: StatusCodes.CREATED,

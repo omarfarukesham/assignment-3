@@ -10,8 +10,10 @@ const blog_validation_1 = require("./blog.validation");
 const auth_1 = __importDefault(require("../../middlewares/auth"));
 const user_constants_1 = require("../user/user.constants");
 const blogRouter = (0, express_1.Router)();
+// blogRouter.post('/', blogController.createBlog)
 blogRouter.post('/', (0, auth_1.default)(user_constants_1.USER_ROLE.admin, user_constants_1.USER_ROLE.user), (0, validateRequest_1.default)(blog_validation_1.BlogValidation.blogValidationSchema), blog_controller_1.blogController.createBlog);
 blogRouter.get('/:id', (0, auth_1.default)(user_constants_1.USER_ROLE.admin, user_constants_1.USER_ROLE.user), blog_controller_1.blogController.getSingleBlog);
+// blogRouter.get('/:id',  blogController.getSingleBlog)
 blogRouter.patch('/:id', (0, auth_1.default)(user_constants_1.USER_ROLE.admin, user_constants_1.USER_ROLE.user), blog_controller_1.blogController.updateBlog);
 blogRouter.delete('/:id', (0, auth_1.default)(user_constants_1.USER_ROLE.admin, user_constants_1.USER_ROLE.user), blog_controller_1.blogController.deleteBlog);
 blogRouter.get('/', blog_controller_1.blogController.getBlogs);
