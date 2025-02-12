@@ -16,7 +16,7 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const cors_1 = __importDefault(require("cors"));
 const checkout_routes_1 = require("./module/checkout/checkout.routes");
 const app = (0, express_1.default)();
-// CORS configuration
+// CORS configuration has solved the issue
 const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174', 'https://boitoi-admin.vercel.app', 'https://boitoi-marketplace.vercel.app'];
 app.use((0, cors_1.default)({
     origin: function (origin, callback) {
