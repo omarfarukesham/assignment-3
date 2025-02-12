@@ -15,6 +15,10 @@ const blogValidationSchema = zod_1.z.object({
             required_error: "Content must be provided and must be a string",
         })
             .min(10, { message: "Content must be at least 10 characters long" }),
+        image: zod_1.z
+            .string({
+            required_error: "Image URL must be provided and must be a string",
+        }),
         author: zod_1.z
             .string({
             required_error: "Author ID must be provided and must be a string",

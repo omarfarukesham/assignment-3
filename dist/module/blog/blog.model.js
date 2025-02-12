@@ -13,6 +13,10 @@ const blogSchema = new mongoose_1.Schema({
         required: true,
         minlength: 10,
     },
+    image: {
+        type: String,
+        required: true,
+    },
     author: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'User',
