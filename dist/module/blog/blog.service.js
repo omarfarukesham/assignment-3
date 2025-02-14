@@ -39,7 +39,7 @@ const updateBlog = (id, data) => __awaiter(void 0, void 0, void 0, function* () 
 });
 const deleteBlog = (blogId, userId) => __awaiter(void 0, void 0, void 0, function* () {
     //  console.log(blogId, userId)
-    const result = yield blog_model_1.default.findByIdAndDelete({ _id: blogId, another: userId });
+    const result = yield blog_model_1.default.findByIdAndDelete({ _id: blogId, author: userId });
     if (result) {
         throw new Error('Could not delete');
     }

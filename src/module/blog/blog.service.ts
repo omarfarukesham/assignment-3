@@ -34,7 +34,7 @@ const updateBlog = async (id: string, data: IBlog) => {
 const deleteBlog = async (blogId: string, userId: string) => {
   //  console.log(blogId, userId)
 
-   const result = await Blog.findByIdAndDelete({_id: blogId, another:userId})
+   const result = await Blog.findByIdAndDelete({_id: blogId, author:userId})
    if(result) {
     throw new Error ('Could not delete')
    }
