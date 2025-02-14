@@ -14,7 +14,7 @@ import { CheckoutRoutes } from './module/checkout/checkout.routes';
 const app = express();
 
 // CORS configuration has solved the issue
-const allowedOrigins = ['http://localhost:5173','http://localhost:3000', 'http://localhost:5174', 'https://boitoi-admin.vercel.app', 'https://boitoi-marketplace.vercel.app'];
+const allowedOrigins = ['http://localhost:5173','http://localhost:3000', 'http://localhost:5174', 'https://boitoi-admin.vercel.app', 'https://boitoi-marketplace.vercel.app','https://nextjs-blogs-sigma.vercel.app'];
 
 app.use(cors({
   origin: function (origin, callback) {
